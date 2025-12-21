@@ -1,0 +1,348 @@
+:root {
+    --bg-color: #1D1D1D;
+    /* Deepslate */
+    --panel-bg: #2C2C2C;
+    /* Lighter Deepslate */
+    --border-color: #000000;
+    --text-color: #FFFFFF;
+    --gold: #FFD700;
+    --green: #52AA38;
+    /* Minecraft Grass */
+    --red: #FF5555;
+    --btn-shadow: #111;
+    --font-main: 'VT323', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    image-rendering: pixelated;
+    /* Essential for that crisp MC look */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    background-image: url('assets/grass_block.png');
+    background-repeat: repeat;
+    background-size: 64px;
+    /* Adjust based on image */
+    background-blend-mode: multiply;
+    /* Blend with deepslate color */
+    color: var(--text-color);
+    font-size: 20px;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px #000;
+    margin: 0 0 10px 0;
+    letter-spacing: 1px;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Utils */
+.hidden {
+    display: none !important;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* Minecraft UI Box */
+.minecraft-box {
+    background-color: #C6C6C6;
+    /* Reference GUI grey */
+    border: 4px solid #000;
+    padding: 2px;
+    box-shadow: inset -4px -4px #555, inset 4px 4px #FFF;
+    color: #404040;
+    /* Dark text for light boxes */
+}
+
+/* Login Box specifics */
+.login-box {
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    padding: 20px;
+}
+
+.login-box h1 {
+    color: #404040;
+    text-shadow: none;
+    font-size: 3em;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-family: var(--font-main);
+    font-size: 1.2em;
+    background: #000;
+    color: #FFF;
+    border: 2px solid #555;
+}
+
+/* Buttons */
+.mc-button {
+    background-color: #787878;
+    color: #FFF;
+    border: 2px solid #000;
+    border-top-color: #AAA;
+    border-left-color: #AAA;
+    padding: 10px 20px;
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-shadow: 2px 2px #000;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.mc-button:active {
+    border-top-color: #000;
+    border-left-color: #000;
+    border-bottom-color: #AAA;
+    border-right-color: #AAA;
+    background-color: #555;
+}
+
+.mc-button.small {
+    width: auto;
+    padding: 5px 15px;
+    font-size: 1rem;
+}
+
+.mc-button.success {
+    background-color: var(--green);
+}
+
+.mc-button.danger {
+    background-color: var(--red);
+}
+
+.mc-button.warning {
+    background-color: #FFAA00;
+}
+
+/* Inputs */
+.mc-input {
+    width: 100%;
+    padding: 10px;
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    background: #FFF;
+    border: 2px solid #000;
+    margin-bottom: 10px;
+}
+
+/* Main Layout */
+#app-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid #333;
+    padding-bottom: 20px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+}
+
+/* Sections */
+section {
+    background: var(--panel-bg);
+    border: 4px solid #000;
+    padding: 20px;
+    position: relative;
+    /* Pixel border effect */
+    box-shadow:
+        -4px 0 0 0 #000,
+        4px 0 0 0 #000,
+        0 -4px 0 0 #000,
+        0 4px 0 0 #000;
+}
+
+/* Leaderboard */
+.leaderboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.leaderboard-row {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border: 2px solid #000;
+}
+
+.rank-icon {
+    margin-right: 15px;
+    font-size: 1.5em;
+}
+
+.rank-name {
+    flex-grow: 1;
+    font-size: 1.5em;
+    color: var(--gold);
+}
+
+.rank-score {
+    font-size: 1.5em;
+    color: #FFF;
+}
+
+/* Character Cards */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.char-card {
+    background: #5A5A5A;
+    /* Stone */
+    border: 4px solid #000;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.char-card.active-user {
+    border-color: var(--gold);
+}
+
+.char-avatar {
+    width: 64px;
+    height: 64px;
+    background: #000;
+    /* Placeholder for head */
+    margin-bottom: 10px;
+}
+
+.char-name {
+    font-size: 1.8em;
+    color: #FFF;
+}
+
+.ingot-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #000;
+    padding: 5px 15px;
+    border: 2px solid #777;
+    margin: 10px 0;
+}
+
+.ingot-count {
+    font-size: 2em;
+    color: var(--gold);
+}
+
+.ingot-icon-sm {
+    width: 24px;
+    height: auto;
+}
+
+.chore-list {
+    width: 100%;
+    margin-top: 15px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    font-size: 0.9em;
+}
+
+.chore-list ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* Admin Footer */
+footer h2 {
+    color: #404040;
+}
+
+footer h3 {
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 1.2em;
+    border-bottom: 2px solid #999;
+    display: inline-block;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    background: #FFF;
+    border: 2px solid #000;
+}
